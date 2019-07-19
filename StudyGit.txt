@@ -11,3 +11,4 @@ git checkout -b <branch name >
 
 git log for seeing history 
 
+read above
