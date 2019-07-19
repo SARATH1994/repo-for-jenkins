@@ -1,0 +1,13 @@
+Merge preserves the changes in commit history or we can track the merge operations by using git log where as it is not possible in rebase.
+
+git merge feature1 : suppose you are on master , the given command integrate ( add the ) changes in feature1 with master
+
+
+Rebase will not maintain the any history, rebase will add the changes of given branch tip of the current branch
+
+git rebase feature1 : Makes, will add the feature1 branch changes on latest tip of Master
+
+git checkout -b <branch name >
+
+git log for seeing history 
+
