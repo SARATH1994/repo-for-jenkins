@@ -184,3 +184,8 @@ pipeline {
 
 The steps section must contain one or more steps
 
+DIRECTIVES 
+
+The environment directive specifies a sequence of key-value pairs which will be defined as environment variables for the all steps, or stage-specific steps, depending on where the environment directive is located within the Pipeline.
+
+This directive supports a special helper method credentials() which can be used to access pre-defined Credentials by their identifier in the Jenkins environme
