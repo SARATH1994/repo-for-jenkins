@@ -57,6 +57,7 @@ Each VM has its own binaries, libraries, and applications that it services, and 
 
 below links use for jenkins understanding 
 
+https://jenkins.io/doc/book/pipeline/syntax/#agent-parameters
 https://jenkins.io/doc/book/pipeline/jenkinsfile/#_footnotedef_2
 https://jenkins.io/doc/book/glossary/#glossary
 
@@ -65,3 +66,121 @@ An agent is typically a machine, or container, which connects to a Jenkins maste
 
 Label
 User-defined text for grouping Agents, typically by similar functionality or capability. For example linux for Linux-based agents or docker for Docker-capable agents.
+
+label
+Execute the Pipeline, or stage, on an agent available in the Jenkins environment with the provided label. For example: agent { label 'my-defined-label' }
+
+Node
+A machine which is part of the Jenkins environment and capable of executing Pipelines or Projects. Both the Master and Agents are considered to be Nodes.
+
+node
+agent { node { label 'labelName' } } behaves the same as agent { label 'labelName' }, but node allows for additional options (such as customWorkspace).
+
+The parameters for agent in DSL in jenkins file 
+
+any 
+none
+node
+label
+docker
+dockerfile
+kubernetes
+
+Jenkinsfile (Declarative Pipeline)
+
+pipeline {
+    agent none 
+    stages {
+        stage('Example Build') {
+            agent { docker 'maven:3-alpine' } 
+            steps {
+                echo 'Hello, Maven'
+                sh 'mvn --version'
+            }
+        }
+        stage('Example Test') {
+            agent { docker 'openjdk:8-jre' } 
+            steps {
+                echo 'Hello, JDK'
+                sh 'java -version'
+            }
+        }
+	
+    }
+}
+
+
+The POST section in DSL in jenkins file
+
+Conditions
+
+always
+Run the steps in the post section regardless of the completion status of the Pipeline’s or stage’s run.
+
+changed
+Only run the steps in post if the current Pipeline’s or stage’s run has a different completion status from its previous run.
+
+fixed
+Only run the steps in post if the current Pipeline’s or stage’s run is successful and the previous run failed or was unstable.
+
+regression
+Only run the steps in post if the current Pipeline’s or stage’s run’s status is failure, unstable, or aborted and the previous run was successful.
+
+aborted
+Only run the steps in post if the current Pipeline’s or stage’s run has an "aborted" status, usually due to the Pipeline being manually aborted. This is typically denoted by gray in the web UI.
+
+failure
+Only run the steps in post if the current Pipeline’s or stage’s run has a "failed" status, typically denoted by red in the web UI.
+
+success
+Only run the steps in post if the current Pipeline’s or stage’s run has a "success" status, typically denoted by blue or green in the web UI.
+
+unstable
+Only run the steps in post if the current Pipeline’s or stage’s run has an "unstable" status, usually caused by test failures, code violations, etc. This is typically denoted by yellow in the web UI.
+
+unsuccessful
+Only run the steps in post if the current Pipeline’s or stage’s run has not a "success" status. This is typically denoted in the web UI depending on the status previously mentioned
+
+cleanup
+Run the steps in this post condition after every other post condition has been evaluated, regardless of the Pipeline or stage’s status.
+
+Example
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    stages {
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+    post { 
+        always { 
+            echo 'I will always say Hello again!'
+        }
+    }
+}
+
+Conventionally, the post section should be placed at the end of the Pipeline.
+Post-condition blocks contain steps the same as the steps section.
+
+
+Stages section : Allowed once in a pipeline 
+Stage section : Aloowed inside Satges section 
+steps section : Alowed inside Stage section
+
+Jenkinsfile (Declarative Pipeline)
+pipeline {
+    agent any
+    stages { 
+        stage('Example') {
+            steps {
+                echo 'Hello World'
+            }
+        }
+    }
+}
+
+The steps section must contain one or more steps
+
