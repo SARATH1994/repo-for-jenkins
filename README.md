@@ -49,3 +49,19 @@ Within each virtual machine runs a unique guest operating system.
 VMs with different operating systems can run on the same physical server—a UNIX VM can sit alongside a Linux VM, and so on. 
 
 Each VM has its own binaries, libraries, and applications that it services, and the VM may be many gigabytes in size.
+
+
+
+
+#############################	Jenkins Info ################################
+
+below links use for jenkins understanding 
+
+https://jenkins.io/doc/book/pipeline/jenkinsfile/#_footnotedef_2
+https://jenkins.io/doc/book/glossary/#glossary
+
+Agent
+An agent is typically a machine, or container, which connects to a Jenkins master and executes tasks when directed by the master.
+
+Label
+User-defined text for grouping Agents, typically by similar functionality or capability. For example linux for Linux-based agents or docker for Docker-capable agents.
