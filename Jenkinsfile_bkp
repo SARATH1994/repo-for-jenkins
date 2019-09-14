@@ -1,0 +1,41 @@
+pipeline {
+     agent {
+        label 'maven'
+    }
+    stages {
+        stage('test') {
+            steps {
+               
+              echo "xxxxxxxxxx"
+              sh '''
+              mvn -version
+             # mvn package
+		echo "testing"
+		
+              ls -lrt 
+	      oc projects || true
+              oc login https://masterpoc.anupala.com:8443 --token=wWxjF4guOZaD7FGKm9UuJTAGvogX56ELU0V4v4ejsc4  --insecure-skip-tls-verify=true
+	      oc project jenkinspoc
+		curl -s https://storage.googleapis.com/kubernetes-helm/helm-v2.14.0-rc.2-linux-amd64.tar.gz | tar xz
+		#tar -zxvf helm-v2.12.1-darwin-amd64.tar.gz
+	      cp linux-amd64/helm /usr/bin
+	     helm init --client-only 
+	     helm version
+              helm del --purge httpd-example  || true
+		oc start-build httpd-example --from-file=index.html
+		#oc start-build tomcat --from-dir=sample
+		sleep 30 
+	      helm install ./httpd --version=1.0 --name=httpd-example --namespace=jenkinspoc
+	helm repo update 
+		
+	     # x=`oc get pods | grep httpd | cut -d " " -f1`
+             # echo $x
+             # oc rsync ./hello-world "$x":/var/www/html --exclude=* --include=index.html
+	      
+		'''  
+             }
+            }
+        }  
+}
+
+
