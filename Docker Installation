@@ -79,5 +79,11 @@ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \ 
   jenkinsci/blueocean 
 
-docker volume inspect jenkins-data / ( we can see where jenkins backup is stored )
+docker volume inspect jenkins-data ( we can see jenkins container data is getting stored in Jenkins-data volume by iisung inspect we can find exact path)
+
+if Container got lost we can run the container with available data like below
+
+docker run -u jenkins --rm -d -p 8080:8080 -p 50000:50000 --mount source=jenkins-data,target=/var/jenkins_home jenkinsci/blueocean
+
+for debug : docker exec -it jenkins-blueocean bash
 
