@@ -79,4 +79,5 @@ docker run \
   -v /var/run/docker.sock:/var/run/docker.sock \ 
   jenkinsci/blueocean 
 
+docker volume inspect jenkins-data / ( we can see where jenkins backup is stored )
 
