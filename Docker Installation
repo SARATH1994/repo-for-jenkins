@@ -1,0 +1,62 @@
+sudo su - root // Performing AS a root user //
+
+yum install docker // Getting and Installing Docker Arch Package from Amazon Repo//
+
+docker version
+
+----Result-------------------
+Cannot connect to the Docker daemon at unix:///var/run/docker.sock. Is the docker dae
+mon running?
+-----------------------------
+
+service start docker ( if you didn't give this,  docker daemon cannot connect )
+
+docker version ( you will able to see docker client version as well as server version )
+
+------------Result----------Like this 
+Client:
+ Version:           18.06.1-ce
+ API version:       1.38
+ Go version:        go1.10.3
+ Git commit:        e68fc7a215d7133c34aa18e3b72b4a21fd0c6136
+ Built:             Mon Jul  1 18:51:44 2019
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server:
+ Engine:
+  Version:          18.06.1-ce
+  API version:      1.38 (minimum version 1.12)
+  Go version:       go1.10.3
+  Git commit:       e68fc7a/18.06.1-ce
+  Built:            Mon Jul  1 18:53:20 2019
+  OS/Arch:          linux/amd64
+  Experimental:     false
+ ----------------------------------
+
+systemctl enable docker // To up and run docker server or Docker daemon upon boot //
+
+exit 
+
+now performing as ec2-user in AWS linux machine
+
+if i give docker version commands it is returning 
+
+Docker client version is good
+
+Docker Server version Got permmission denied 
+
+::::: Manage Docker as a non-root user ::::::::::::;
+
+Link : https://docs.docker.com/install/linux/linux-postinstall/
+
+To create the docker group and add your user:
+
+Create the docker group.
+
+$ sudo groupadd docker
+
+Add your user to the docker group.
+
+$ sudo usermod -aG docker $USER
+
