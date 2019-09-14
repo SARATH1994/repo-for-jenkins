@@ -58,5 +58,25 @@ $ sudo groupadd docker
 
 Add your user to the docker group.
 
-$ sudo usermod -aG docker $USER
+$ sudo usermod -aG docker ec2-user
+
+logout and login again 
+
+
+:::::::::::::::Jenkins Installation :::::::::::::::::::::::::;
+
+link :https://jenkins.io/doc/book/installing/#setup-wizard 
+
+docker pull jenkinsci/blueocean
+
+docker run \
+  -u root \  ( other wise you can create user jenkins and add it to docker group )
+  --rm \ 
+  -d \ 
+  -p 8080:8080 \ 
+  -p 50000:50000 \ 
+  -v jenkins-data:/var/jenkins_home \ 
+  -v /var/run/docker.sock:/var/run/docker.sock \ 
+  jenkinsci/blueocean 
+
 
