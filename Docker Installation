@@ -85,5 +85,11 @@ if Container got lost we can run the container with available data like below
 
 docker run -u jenkins --rm -d -p 8080:8080 -p 50000:50000 --mount source=jenkins-data,target=/var/jenkins_home jenkinsci/blueocean
 
+the Above command will do only sure that Persistant data : it wont make any docker service available inside of the running docker container ( jenkins ) 
+
+The below command takes/mount  the existing data from jenkins-data volume and -v flag attach docker serverice file to container. 
+
+Perfect Command :docker run -u jenkins --rm -d -p 8080:8080 -p 50000:50000 --mount source=jenkins-data,target=/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean
+
 for debug : docker exec -it jenkins-blueocean bash
 
