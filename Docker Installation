@@ -89,7 +89,9 @@ the Above command will do only sure that Persistant data : it wont make any dock
 
 The below command takes/mount  the existing data from jenkins-data volume and -v flag attach docker serverice file to container. 
 
-Perfect Command :docker run -u jenkins --rm -d -p 8080:8080 -p 50000:50000 --mount source=jenkins-data,target=/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock jenkinsci/blueocean
+Perfect Command : 
+
+docker run -u jenkins -d -p 8080:8080 -p 50000:50000 --mount source=jenkins-data,target=/var/jenkins_home -v /var/run/docker.sock:/var/run/docker.sock --restart always jenkinsci/blueocean
 
 for debug : docker exec -it jenkins-blueocean bash
 
