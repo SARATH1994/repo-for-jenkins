@@ -43,3 +43,7 @@ The SonarQube Server and the SonarQube Database must be located in the same netw
 SonarScanners don't need to be on the same network as the SonarQube Server.
 
 There is no communication between SonarScanners and the SonarQube Database.
+
+
+ mvn sonar:sonar   -Dsonar.projectKey=maven-basic   -Dsonar.host.url=http://34.68.60.109:9000   -Dsonar.login=1493628c1ce6e037843606b2aec214c4e10169e8
+ curl http://34.68.60.109:9000/api/qualitygates/project_status?projectKey=maven-basic
