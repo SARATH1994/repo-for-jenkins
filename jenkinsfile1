@@ -3,8 +3,9 @@ pipeline {
     stages {
         stage('Example Build') {
             steps {
-                sh 'mvn clean install'
+                
                 sh 'mvn sonar:sonar -Dsonar.host.url=http://52.66.187.124:9000'
+                sh 'mvn clean install'
             }
         }
     }
