@@ -4,6 +4,7 @@ pipeline {
         stage('Example Build') {
             steps {
                 sh 'mvn -B clean verify'
+                sh 'mvn sonar:sonar -Dsonar.host.url=http://52.66.187.124:9000'
             }
         }
     }
