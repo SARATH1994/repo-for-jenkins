@@ -35,11 +35,17 @@
     </plugins>
    
   </build>
-     <distributionManagement>	
-   <snapshotRepository>	
-      <id>maven-snapshots</id>	
-      <url>http://13.232.175.121:8081/repository/maven-snapshots/</url>	
-   </snapshotRepository>	
-</distributionManagement>
+    <distributionManagement>
+    <repository>
+      <id>nexus</id>
+      <name>Releases</name>
+      <url>http://13.127.18.35:8081/repository/maven-releases</url>
+    </repository>
+    <snapshotRepository>
+      <id>nexus</id>
+      <name>Snapshot</name>
+      <url>http://13.127.18.35:8081/repository/maven-snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
   
 </project>
