@@ -4,6 +4,7 @@ pipeline {
       docker 
         {
            image 'mvn:latest' 
+           args '-v maven-conf:/root/.m2'
           
            }
            
