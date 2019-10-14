@@ -4,7 +4,7 @@ pipeline {
       docker 
         {
            image 'mvn:new' 
-           args '-v maven-repo:/root/.m2'
+          
            }
            
             }
