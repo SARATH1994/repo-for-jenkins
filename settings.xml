@@ -26,12 +26,12 @@
 
   <servers>
   <server>
-      <id>maven-snapshots</id>
+      <id>nexus-snapshots</id>
       <username>admin</username>
       <password>admin</password>
     </server>
     <server>
-      <id>maven-releases</id>
+      <id>nexus-releases</id>
       <username>admin</username>
       <password>admin</password>
     </server>
