@@ -47,3 +47,7 @@ There is no communication between SonarScanners and the SonarQube Database.
 
  mvn sonar:sonar   -Dsonar.projectKey=maven-basic   -Dsonar.host.url=http://34.68.60.109:9000   -Dsonar.login=1493628c1ce6e037843606b2aec214c4e10169e8
  curl http://34.68.60.109:9000/api/qualitygates/project_status?projectKey=maven-basic
+
+docker run -d --name sonarqube     -p 9000:9000     -v SonarQ-conf:/opt/sonarqube/conf     -
+v SonarQ-data:/opt/sonarqube/data     -v SonarQ-logs:/opt/sonarqube/logs     -v SonarQ-extensions:/opt/sonarqube/extension
+s     sonarqube76eb2ee8915b 
