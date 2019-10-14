@@ -15,7 +15,7 @@ pipeline {
                 
                 sh 'mvn sonar:sonar -Dsonar.host.url=http://13.234.112.119:8081'
                 sh 'mvn clean install'
-                sh 'mvn clean deploy'
+                sh 'mvn -X clean deploy'
             }
         }
     }
