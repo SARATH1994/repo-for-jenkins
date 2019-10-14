@@ -35,17 +35,16 @@
     </plugins>
    
   </build>
-    <distributionManagement>
-    <repository>
-      <id>nexus</id>
-      <name>Releases</name>
-      <url>http://13.127.18.35:8081/repository/maven-releases</url>
-    </repository>
+  
+  <distributionManagement>
     <snapshotRepository>
-      <id>nexus</id>
-      <name>Snapshot</name>
-      <url>http://13.127.18.35:8081/repository/maven-snapshots</url>
+      <id>nexus-snapshots</id>
+      <url>http://ec2-52-66-198-94.ap-south-1.compute.amazonaws.com:8081/repository/maven-snapshots/</url>
     </snapshotRepository>
+    <repository>
+      <id>nexus-releases</id>
+      <url>http://ec2-52-66-198-94.ap-south-1.compute.amazonaws.com:8081/repository/maven-releases/</url>
+    </repository>
   </distributionManagement>
   
 </project>
