@@ -1,6 +1,13 @@
   
 pipeline {
-    agent { docker 'maven:alpine-new' } 
+    agent { 
+      docker 
+        {
+           image 'maven:alpine-new' 
+           args '-v maven-repo:/root/.m2'
+           }
+           
+            }
     stages {
         stage('Example Build') {
             steps {
