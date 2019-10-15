@@ -3,8 +3,8 @@ pipeline {
     agent { 
       docker 
         {
-           image 'mvn:latest' 
-           args '-v maven-conf:/root/.m2'
+           image 'maven:alpine-new' 
+           
           
            }
            
