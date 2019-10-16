@@ -238,3 +238,6 @@ Input
 when
 Steps 
 script : Shared Libraries 
+
+
+ARTICLE ABT DOCKER UID & GIDS : https://medium.com/@mccode/understanding-how-uid-and-gid-work-in-docker-containers-c37a01d01cf
