@@ -13,7 +13,7 @@ pipeline {
                   echo "PATH = ${PATH}"
                   echo "M2_HOME = ${M2_HOME}"
                 
-                mvn sonar:sonar -Dsonar.host.url=http://13.234.226.161:8081'
+                mvn sonar:sonar -Dsonar.host.url=http://13.234.226.161:8081
                
                 mvn -X clean deploy
                 
