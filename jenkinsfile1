@@ -26,7 +26,7 @@ stage('Sonar Quality Check')
             steps {
            
            
-          sh 'echo Soanr URL: ${SonarQube_url}"
+          sh 'echo Soanr URL: ${SonarQube_url}'
             
           sh 'mvn sonar:sonar -Dsonar.host.url=http://${SonarQube_url}'
           sh 'curl http://${SonarQube_url}/api/qualitygates/project_status?projectKey=com.mycompany.app:my-app'
