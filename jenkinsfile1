@@ -13,6 +13,7 @@ pipeline {
         stage('Example Build') {
             steps {
                 
+                sh "cat /root/.m2/settings.xml"
                 sh 'mvn sonar:sonar -Dsonar.host.url=http://13.234.226.161:8081'
                
                 sh 'mvn -X clean deploy'
