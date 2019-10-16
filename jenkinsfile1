@@ -3,7 +3,7 @@ pipeline {
       docker 
         {
            image 'maven:alpine' 
-           args '-v maven-repo:/root/.m2/'
+           args '-v maven-conf:/root/.m2/'
           
            }
            
