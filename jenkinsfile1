@@ -3,7 +3,7 @@ pipeline {
       docker 
         {
            image 'maven:alpine' 
-           args '-v maven-repo:/root/.m2 -v maven-conf:/usr/share/maven/conf'
+           args '-v maven-repo:/root/.m2/'
           
            }
            
@@ -15,7 +15,7 @@ pipeline {
                 sh 'mvn sonar:sonar -Dsonar.host.url=http://13.234.226.161:8081'
              
              sh 'mvn clean install'
-                sh 'mvn clean deploy'
+                sh 'mvn -X clean deploy'
             }
         }
     }
