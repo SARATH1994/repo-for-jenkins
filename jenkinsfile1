@@ -21,6 +21,8 @@ docker
  stages {
      
 stage('Sonar Quality Check')
+
+{
             
             
             steps {
