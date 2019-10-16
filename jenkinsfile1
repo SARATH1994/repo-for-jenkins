@@ -13,7 +13,8 @@ docker
  environment { 
  
     EMAIL_RECIPIENTS = 'sarathgogineni@outlook.com'
-
+    SonarQube_url='13.234.226.161:8081'
+    
  
  }
  
@@ -23,9 +24,12 @@ stage('Sonar Quality Check')
             
             
             steps {
+           
+           
+          sh 'echo Soanr URL: ${SonarQube_url}"
             
-          sh 'mvn sonar:sonar -Dsonar.host.url=http://13.234.226.161:8081'
-             mvn clean install
+          sh 'mvn sonar:sonar -Dsonar.host.url=http://${SonarQube_url}'
+          sh 'curl http://${SonarQube_url}/api/qualitygates/project_status?projectKey=com.mycompany.app:my-app'
          
             }
         }
