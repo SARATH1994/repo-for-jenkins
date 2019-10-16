@@ -24,7 +24,7 @@ stage('Sonar Quality Check')
             
             steps {
             
-          shmvnonar:sonar -Dsonar.host.url=http://13.234.226.161:8081
+          sh 'mvn sonar:sonar -Dsonar.host.url=http://13.234.226.161:8081'
              mvn clean install
          
             }
