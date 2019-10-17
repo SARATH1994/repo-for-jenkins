@@ -27,3 +27,86 @@ But the following ones are invalid identifiers:
 def 3tier
 def a+b
 def a#b
+
+Naming Variables
+
+Live Demo
+class Example { 
+   static void main(String[] args) { 
+      // Defining a variable in lowercase  
+      int x = 5;
+	  
+      // Defining a variable in uppercase  
+      int X = 6; 
+	  
+      // Defining a variable with the underscore in it's name 
+      def _Name = "Joe"; 
+		
+      println(x); 
+      println(X); 
+      println(_Name); 
+   } 
+}
+
+
+Printing Variables
+
+
+class Example { 
+   static void main(String[] args) { 
+      //Initializing 2 variables 
+      int x = 5; 
+      int X = 6; 
+	  
+      //Printing the value of the variables to the console 
+      println("The value of x is " + x );  
+   }
+}
+
+Arithmetic Operators
++ - / * % ++ --
+Relational operators
+== != < <= > >=
+Logical Operators
+&& || !
+Assignment operators
++= -= *= /= %= 
+def A = 5
+A+=3
+Output will be 8 (Smilar for Others)
+
+Range Operators
+def range = 0..5 
+class Example { 
+   static void main(String[] args) { 
+      def range = 5..10; 
+      println(range); 
+      println(range.get(2)); 
+   } 
+}
+
+Result:
+
+[5, 6, 7, 8, 9, 10] 
+7
+
+The while statement is executed by first evaluating the condition expression (a Boolean value), and if the result is true, then the statements in the while loop are executed. The process is repeated starting from the evaluation of the condition in the while statement.
+
+while(condition) { 
+   statement #1 
+   statement #2 
+   ... 
+}
+
+class Example {
+   static void main(String[] args) {
+      int count = 0;
+		
+      while(count<5) {
+         println(count);
+         count++;
+      }
+   }
+   
+   
+}
