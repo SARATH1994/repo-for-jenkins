@@ -274,3 +274,167 @@ class Example {
       }
    }
 }
+
+
+##########Groovy - Methods######################
+
+
+A method is in Groovy is defined with a return type or with the def keyword  It’s not necessary that the types are explicitly defined when defining the arguments. 
+
+
+Method with NO Parameters
+
+def methodName() { 
+   //Method code 
+}
+
+class Example {
+   static def DisplayName() {
+      println("This is how methods work in groovy");
+      println("This is an example of a simple method");
+   } 
+	
+   static void main(String[] args) {
+      DisplayName();
+   } 
+}
+
+
+Method with Parameters
+
+def methodName(parameter1, parameter2, parameter3) { 
+   // Method code goes here 
+}
+
+class Example {
+   static void sum(int a,int b) {
+      int c = a+b;
+      println(c);
+   }  
+	
+   static void main(String[] args) {
+      sum(10,5);
+   } 
+}
+
+Method with Default Parameters
+
+class Example { 
+   static void sum(int a,int b = 5) { 
+      int c = a+b; 
+      println(c); 
+   } 
+	
+   static void main(String[] args) {
+      sum(6); 
+   } 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
