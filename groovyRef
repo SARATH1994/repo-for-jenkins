@@ -110,3 +110,57 @@ class Example {
    
    
 }
+
+For Loop 
+
+Live Demo
+class Example { 
+   static void main(String[] args) {
+	
+      for(int i = 0;i<5;i++) {
+         println(i);
+      }
+		
+   }
+}
+
+For-in
+
+for(variable in range) { 
+   statement #1 
+   statement #2 
+   … 
+}
+
+
+class Example { 
+   static void main(String[] args) { 
+      int[] array = [0,1,2,3]; 
+		
+      for(int i in array) { 
+         println(i); 
+      } 
+   } 
+}
+
+Live Demo
+class Example {
+   static void main(String[] args) {
+	
+      for(int i in 1..5) {
+         println(i);
+      }
+		
+   } 
+} 
+
+Live Demo
+class Example {
+   static void main(String[] args) {
+      def employee = ["Ken" : 21, "John" : 25, "Sally" : 22];
+		
+      for(emp in employee) {
+         println(emp);
+      }
+   }
+}
