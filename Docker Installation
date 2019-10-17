@@ -95,3 +95,7 @@ docker run -u jenkins -d -p 8080:8080 -p 50000:50000 --mount source=jenkins-data
 
 for debug : docker exec -it jenkins-blueocean bash
 
+chmod 777 /var/run/docker.sock // to allow other containers to use docker host docker.service 
+
+
+
