@@ -1,0 +1,29 @@
+// ----line1----
+
+/* ------line1-----
+--------line2------ */
+
+/**
+ * A Groovy doc comment
+ */
+ 
+ #!/usr/bin/env groovy
+ 
+ 2. Keywords
+ 
+ 3.1. Normal identifiers
+ 
+ Identifiers start with a letter, a dollar or an underscore. They cannot start with a number.
+ 
+Here are a few examples of valid identifiers (here, variable names):
+
+def name
+def item3
+def with_underscore
+def $dollarStart
+
+But the following ones are invalid identifiers:
+
+def 3tier
+def a+b
+def a#b
