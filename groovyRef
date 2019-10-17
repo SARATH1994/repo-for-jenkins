@@ -1,3 +1,5 @@
+ #!/usr/bin/env groovy
+
 // ----line1----
 
 /* ------line1-----
@@ -161,6 +163,114 @@ class Example {
 		
       for(emp in employee) {
          println(emp);
+      }
+   }
+}
+
+break 
+
+Live Demo
+class Example {
+   static void main(String[] args) {
+      int[] array = [0,1,2,3];
+		
+      for(int i in array) {
+         println(i);
+         if(i == 2)
+         break;
+      }
+   } 
+}
+
+Continue
+
+IF 
+
+Live Demo
+class Example { 
+   static void main(String[] args) { 
+      // Initializing a local variable 
+      int a = 2 
+		
+      //Check for the boolean condition 
+      if (a<100) { 
+         //If the condition is true print the following statement 
+         println("The value is less than 100"); 
+      } 
+   } 
+}
+
+class Example { 
+   static void main(String[] args) { 
+      // Initializing a local variable 
+      int a = 2
+		
+      //Check for the boolean condition 
+      if (a<100) { 
+         //If the condition is true print the following statement 
+         println("The value is less than 100"); 
+      } else { 
+         //If the condition is false print the following statement 
+         println("The value is greater than 100"); 
+      } 
+   } 
+}
+
+if -else-if 
+
+
+class Example { 
+   static void main(String[] args) { 
+      // Initializing a local variable 
+      int a = 12 
+		
+      //Check for the boolean condition 
+      if (a>100) {
+         //If the condition is true print the following statement 
+         println("The value is less than 100"); 
+      } else 
+         // Check if the value of a is greater than 5 
+			
+      if (a>5) { 
+         //If the condition is true print the following statement 
+         println("The value is greater than 5 and greater than 100"); 
+      } else { 
+         //If the condition is false print the following statement 
+         println("The value of a is less than 5"); 
+      }  
+   } 
+}
+
+
+
+Switch
+
+
+class Example { 
+   static void main(String[] args) { 
+      //initializing a local variable 
+      int a = 2
+		
+      //Evaluating the expression value 
+      switch(a) {            
+         //There is case statement defined for 4 cases 
+         // Each case statement section has a break condition to exit the loop 
+			
+         case 1: 
+            println("The value of a is One"); 
+            break; 
+         case 2: 
+            println("The value of a is Two"); 
+            break; 
+         case 3: 
+            println("The value of a is Three"); 
+            break; 
+         case 4: 
+            println("The value of a is Four"); 
+            break; 
+         default: 
+            println("The value is unknown"); 
+            break; 
       }
    }
 }
