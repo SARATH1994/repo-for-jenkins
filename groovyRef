@@ -330,10 +330,65 @@ class Example {
    } 
 }
 
+Method Return Values
+
+class Example {
+   static int sum(int a,int b = 5) {
+      int c = a+b;
+      return c;
+   } 
+	
+   static void main(String[] args) {
+      println(sum(6));
+   } 
+}
+
+Local and External Parameter Names
+
+class Example { 
+   static int x = 100; 
+	
+   public static int getX() { 
+      int lx = 200; 
+      println(lx); 
+      return x; 
+   } 
+	
+   static void main(String[] args) { 
+      println(getX()); 
+   }  
+}
 
 
+Instance methods ??????????? Needs to read More ?????????????? 
 
 
+Groovy - File I/O
+
+Groovy - Optionals
+
+class Example { 
+   static void main(String[] args) { 
+      // Example of an Integer using def 
+      def a = 100; 
+      println(a); 
+		
+      // Example of an float using def 
+      def b = 100.10; 
+      println(b); 
+		
+      // Example of an Double using def 
+      def c = 100.101; 
+      println(c);
+		
+      // Example of an String using def 
+      def d = "HelloWorld"; 
+      println(d); 
+   } 
+} 
+
+
+Groovy - Numbers
 
 
 
