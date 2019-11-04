@@ -1,3 +1,11 @@
+It is possible to trigger the jenkins jobs based on changes done to particular file 
+
+Change Log : A changelog is a log or record of all notable changes made to a project. The project is often a website or software project, and the changelog usually includes records of changes such as bug fixes, new features, etc.
+
+Change Set : a changeset is a set of changes which should be treated as an indivisible group (i.e. an atomic package); the list of differences between two successive versions in the repository.
+
+
+
 Reading VM and Containerization
 
 Computer Hardware includes the physical, tangible parts or components of a computer, such as the cabinet, central processing unit, monitor, keyboard, computer data storage, graphics card, sound card, speakers and motherboard. By contrast, software is instructions that can be stored and run by hardware
