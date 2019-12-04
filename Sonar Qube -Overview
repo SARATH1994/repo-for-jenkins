@@ -51,3 +51,5 @@ There is no communication between SonarScanners and the SonarQube Database.
 docker run -d --name sonarqube     -p 9000:9000     -v SonarQ-conf:/opt/sonarqube/conf     -
 v SonarQ-data:/opt/sonarqube/data     -v SonarQ-logs:/opt/sonarqube/logs     -v SonarQ-extensions:/opt/sonarqube/extension
 s     sonarqube76eb2ee8915b 
+
+All the Sonar API documentation resides at : http://localhost:9000/web_api/
