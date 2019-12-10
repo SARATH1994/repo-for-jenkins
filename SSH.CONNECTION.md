@@ -24,7 +24,7 @@ sudo su - user1/user2
 
 ###############################################
 
-Log as root to Source server
+Log as root to client server
 
 edit the /etc/hosts file                                          ------> Adding custom Name to the IP in hosts file 
 
@@ -60,6 +60,8 @@ ssh-keygen will generate pub,private key
 with or without sudo 
 
 ssh-copy-id -i /home/user1/.ssh/id_rsa.pub user2@webserver
+
+enter password for user2 upon prompt 
 
 make sure 600 permissions to /home/user1/.ssh/authorized_keys file in source server 
 
