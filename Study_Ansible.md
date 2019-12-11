@@ -66,9 +66,53 @@ $ ansible all -m ping -u bruce --become
 $ ansible all -m ping -u bruce --become --become-user batman
 
 
- to successed above you have to add the -u user to sudoers group , refer 
+ to successed above you have to add the -u user to sudoers group , refer Imp Sites Ref.md in this repo.
+ 
+ Inventory :
+ 
+ The default location for inventory is a file called /etc/ansible/hosts. You can specify a different inventory file at the command line using the -i <path> option
+
+Inventory basics: formats, hosts, and groups
+
+INI formant 
+
+mail.example.com
+
+[webservers]
+foo.example.com
+bar.example.com
+
+[dbservers]
+one.example.com
+two.example.com
+three.example.com
 
 
+YAML format for the same 
+
+all:
+  hosts:
+    mail.example.com:
+  children:
+    webservers:
+      hosts:
+        foo.example.com:
+        bar.example.com:
+    dbservers:
+      hosts:
+        one.example.com:
+        two.example.com:
+        three.example.com:
+        
+Default groups
+
+There are two default groups: all and ungrouped.
+
+The all group contains every host. The ungrouped group contains all hosts that don’t have another group aside from all.
+
+***Every host will always belong to at least 2 groups (all and ungrouped or all and some other group).
+
+Though all and ungrouped are always present, they can be implicit and not appear in group listings like group_names.       
 
 
 
