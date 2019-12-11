@@ -193,10 +193,67 @@ all:
       children:
         west:
 
+As you add more and more managed nodes to your Ansible inventory, however, you will likely want to store variables in separate host and group variable files.
+
+####Assigning a variable to one machine: host variables
+
+atlanta:
+  host1:
+    http_port: 80
+    maxRequestsPerChild: 808
+  host2:
+    http_port: 303
+    maxRequestsPerChild: 909
+    
+Inventory aliases
+
+...
+  hosts:
+    jumper:
+      ansible_port: 5555
+      ansible_host: 192.0.2.50
 
 
+In the above example, running Ansible against the host alias “jumper” will connect to 192.0.2.50 on port 5555. This only works for hosts with static IPs, or when you are connecting through tunnels.
 
+######Assigning a variable to many machines: group variables
 
+atlanta:
+  hosts:
+    host1:
+    host2:
+  vars:
+    ntp_server: ntp.atlanta.example.com
+    proxy: proxy.atlanta.example.com
+    
+####    Example     
 
+[childgroup2]
+host1
+host2
+ 
+[childgroup1]
+host2
+host3
+ 
+[parent1:children]
+childgroup1
+childgroup2
 
+above is equivalent to YAML is 
+
+all:
+    children:
+        parent1:
+            children:
+                childgroup1:
+                    host1:
+                    host2:
+                childgroup2:
+                    host3:
+                    host4:
+                
+A group of a group is called a child group.
+
+The relation is defined through the use of the children key word.                
 
