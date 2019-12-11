@@ -117,9 +117,48 @@ The all group contains every host. The ungrouped group contains all hosts that d
 Though all and ungrouped are always present, they can be implicit and not appear in group listings like group_names.       
 
 
+Hosts in multiple groups
+
+You can (and probably will) put each host in more than one group. For example a production webserver in a datacenter in Atlanta might be included in groups called [prod] and [atlanta] and [webservers]. You can create groups that track:
 
 
+What - An application, stack or microservice. (For example, database servers, web servers, etc).
+Where - A datacenter or region, to talk to local DNS, storage, etc. (For example, east, west).
+When - The development stage, to avoid testing on production resources. (For example, prod, test).
 
+Extending the previous YAML inventory to include what, when, and where would look like:
+
+all:
+  hosts:
+    mail.example.com:   ##UNGROUPED HOST
+  children:
+    webservers:
+      hosts:
+        foo.example.com:        ##What:  servers based on application, wether theese are web (or) db servers 
+        bar.example.com:
+    dbservers:
+      hosts:
+        one.example.com:        ##What:  servers based on application, wether theese are web (or) db servers
+        two.example.com:
+        three.example.com:
+    east:
+      hosts:
+        foo.example.com:
+        one.example.com:        ##Where:  servers based on location, where theese are located  
+        two.example.com:
+    west:
+      hosts:
+        bar.example.com:        ##Where:  servers based on location, where theese are located
+        three.example.com:
+    prod:
+      hosts:
+        foo.example.com:        ##Which/When : servers based on development strategy either dev/test/prod ..etc 
+        one.example.com:
+        two.example.com:        
+    test:                       ##Which/When : servers based on development strategy either dev/test/prod ..etc 
+      hosts:
+        bar.example.com:
+        three.example.com:
 
 
 
