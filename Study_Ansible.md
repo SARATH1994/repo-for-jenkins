@@ -160,6 +160,40 @@ all:
         bar.example.com:
         three.example.com:
 
+You can see that one.example.com exists in the dbservers, east, and prod groups.
+
+You can also use nested groups to simplify prod and test in this inventory, for the same result:
+
+all:
+  hosts:
+    mail.example.com:
+  children:
+    webservers:
+      hosts:
+        www[01:50].example.com:     ##Adding ranges of numeric  hosts
+        bar.example.com:
+    dbservers:
+      hosts:
+        db-[a:f].example.com       ##Adding ranges of alphabetic hosts
+        two.example.com:
+        three.example.com:
+    east:
+      hosts:
+        foo.example.com:
+        one.example.com:
+        two.example.com:
+    west:
+      hosts:
+        bar.example.com:
+        three.example.com:
+    prod:
+      children:
+        east:
+    test:
+      children:
+        west:
+
+
 
 
 
