@@ -257,3 +257,13 @@ A group of a group is called a child group.
 
 The relation is defined through the use of the children key word.                
 
+
+Child groups have a couple of properties to note:
+
+Any host that is member of a child group is automatically a member of the parent group.
+A child group’s variables will have higher precedence (override) a parent group’s variables.
+Groups can have multiple parents and children, but not circular relationships.
+Hosts can also be in multiple groups, but there will only be one instance of a host, merging the data from the multiple groups.
+
+If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.
+
