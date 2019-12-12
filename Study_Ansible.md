@@ -376,9 +376,87 @@ tasks:
     template:
       src: somefile.j2
       dest: /etc/httpd/conf.d/{{ vhost }}
+
+Ansible prefers listing modules like this:
+
+template:
+    src: templates/foo.j2
+    dest: /etc/foo.conf
+
+These ‘notify’ actions are triggered at the end of each block of tasks in a play, and will only be triggered once even if notified by multiple different tasks.
+
+- name: template configuration file
+  template:
+    src: template.j2
+    dest: /etc/foo.conf
+  notify:
+     - restart memcached
+     - restart apache
             
  The things listed in the notify section of a task are called Handlers.
  
+ Handlers are lists of tasks, not really any different from regular tasks, that are referenced by a globally unique name, and are notified by notifiers. If nothing notifies a handler, it will not run. Regardless of how many tasks notify a handler, it will run only once,
+ 
+ 
+ Here’s an example handlers section:
+
+handlers:
+    - name: restart memcached
+      service:
+        name: memcached
+        state: restarted
+    - name: restart apache
+      service:
+        name: apache
+        state: restarted
+ 
+We sholdnt use like this ! 
+handlers:
+# this handler name may cause your play to fail!
+
+Instead, place variables in the task parameters of your handler. You can load the values using include_vars like this:
+
+tasks:
+  - name: Set host variables based on distribution
+    include_vars: "{{ ansible_facts.distribution }}.yml"
+
+handlers:
+  - name: restart web service
+    service:
+      name: "{{ web_service_name | default('httpd') }}"
+      state: restarted
+As of Ansible 2.2, handlers can also “listen” to generic topics, and tasks can notify those topics as follows:
+
+handlers:
+    - name: restart memcached
+      service:
+        name: memcached
+        state: restarted
+      listen: "restart web services"
+    - name: restart apache
+      service:
+        name: apache
+        state: restarted
+      listen: "restart web services"
+
+tasks:
+    - name: restart everything
+      command: echo "this task will restart the web services"
+      notify: "restart web services"
+Use unique handler names. If you trigger more than one handler with the same name, the first one(s) get overwritten. Only the last one defined will run.
+
+handlers notified within pre_tasks, tasks, and post_tasks
+
+Linting playbooks
+You can use ansible-lint to run a detail check of your playbooks before you execute them.
+
+To see what hosts would be affected by a playbook before you run it, you can do this:
+
+ansible-playbook playbook.yml --list-hosts
+
+
+
+- name: restart "{{ web_service_name }}"        
  
  
  
