@@ -267,3 +267,119 @@ Hosts can also be in multiple groups, but there will only be one instance of a h
 
 If Ansible modules are the tools in your workshop, playbooks are your instruction manuals, and your inventory of hosts are your raw material.
 
+While you might run the main /usr/bin/ansible program for ad-hoc tasks, playbooks are more likely to be kept in source control and used to push out your configuration or assure the configurations of your remote systems are in spec.
+
+ At a basic level, a task is nothing more than a call to an ansible module.
+ 
+ #### ####################### pLAY Book 
+ 
+ 
+ 
+ 
+ Each playbook is composed of one or more ‘plays’ in a list.
+ 
+ the goal of a play is to map a group of hosts to some well defined roles, represented by things ansible calls tasks. 
+ 
+ By composing a playbook of multiple ‘plays’, it is possible to orchestrate multi-machine deployments, running certain steps on all machines in the webservers group, then certain steps on the database server group, then more commands back on the webservers group, etc.
+ 
+ The goal of each task is to execute a module, with very specific arguments. Variables can be used in arguments to modules.
+ 
+ Basics
+Hosts and Users
+
+For each play in a playbook, you get to choose which machines in your infrastructure to target and what remote user to complete the steps (called tasks) as.
+
+The hosts line is a list of one or more groups or host patterns, separated by colons, as described in the Patterns: targeting hosts and groups documentation. The remote_user is just the name of the user account:
+
+### Remote User & Hosts 
+---
+- hosts: webservers
+  remote_user: root
+  
+ Remote users can also be defined per task: 
+ 
+- hosts: webservers
+  remote_user: root
+  tasks:
+    - name: test connection
+      ping:
+      remote_user: yourname  
+      
+ ### bECOME uSEAGE 
+ 
+ become_user defines the user which is being used for privilege escalation.
+
+become simply is a flag to either activate or deactivate the same.
+
+Here are three examples which should make it clear:
+
+This task will be executed as root, because root is the default user for privilege escalation:
+
+- do: something
+  become: yes
+
+This task will be executed as user someone, because the user is explciitly set:
+
+- do: something
+  become: yes
+  become_user: someone
+
+This task will not do anything with become_user, because become is not set and defaults to false/no:
+
+- do: something
+  become_user: someone
+...unless become was set to true on a higher level, e.g. a block, the playbook, group or host-vars etc.
+
+################
+ 
+ 
+ Each Play book has many plays , each paly has many tasks & each task should have a name, which is included in the output from running the playbook.
+ 
+ Tasks can be declared using module: options
+ 
+ Here is what a basic task looks like. As with most modules, the service module takes key=value arguments:
+ 
+ tasks:
+  - name: make s
+      state: started
+      ure apache is running
+    service:
+      name: httpd
+      state: started
+
+The command and shell modules are the only modules that just take a list of arguments and don’t use the key=value form. 
+
+The command and shell module care about return codes, so if you have a command whose successful exit code is not zero, you may wish to do this:
+
+tasks:
+  - name: run this command and ignore the result
+    shell: /usr/bin/somecommand || /bin/true
+   
+Or this:
+
+tasks:
+  - name: run this command and ignore the result
+    shell: /usr/bin/somecommand
+    ignore_errors: True
+
+If the action line is getting too long for comfort you can break it on a space and indent any continuation lines:
+
+tasks:
+  - name: Copy ansible inventory file to client
+    copy: src=/etc/ansible/hosts dest=/etc/ansible/hosts
+            owner=root group=root mode=0644    
+            
+Variables can be used in action lines. Suppose you defined a variable called vhost in the vars section, you could do this:
+
+tasks:
+  - name: create a virtual host file for {{ vhost }}
+    template:
+      src: somefile.j2
+      dest: /etc/httpd/conf.d/{{ vhost }}
+            
+ The things listed in the notify section of a task are called Handlers.
+ 
+ 
+ 
+ 
+ 
