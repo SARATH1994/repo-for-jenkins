@@ -10,7 +10,7 @@
       state: present
    - name: Uploading Custom index.html
      copy:
-      src: /home/ansadmin/index.html
+      src: index.html
       dest: /var/www/html/index.html
      notify: restart_httpd
    - name: debugging
@@ -18,7 +18,7 @@
       msg: "hello there is Robot,this can be install in {{ cloud_platform }} or {{ alternative }}"
   handlers: 
    - name: restart_httpd
-      service: 
-       name: 'httpd'
-       state: restarted
+     service: 
+      name: 'httpd'
+      state: restarted
 
