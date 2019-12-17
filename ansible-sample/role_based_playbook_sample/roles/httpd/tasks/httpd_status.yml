@@ -1,0 +1,14 @@
+---
+   - name: Checking httpd service
+     yum:
+      name: "httpd"
+      state: present
+   - name: Uploading Custom index.html
+     copy:
+      src: index.html
+      dest: /var/www/html/index.html
+     notify: restart_httpd
+   - name: debugging
+     debug:
+      msg: "hello there is Robot,this can be install in {{ cloud_platform }} or {{ alternative }}"
+

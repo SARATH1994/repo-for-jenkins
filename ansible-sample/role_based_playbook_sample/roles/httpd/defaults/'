@@ -1,0 +1,4 @@
+---
+# defaults file for httpd
+level_Ansible: noob
+cloud_platform: GOOGLE CLOUD

@@ -1,0 +1,4 @@
+---
+# vars file for httpd
+cloud_platform: Openshift
+alternative: Azure or Aws 

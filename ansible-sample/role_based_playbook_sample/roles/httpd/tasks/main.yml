@@ -1,0 +1,6 @@
+---
+# tasks file for httpd
+- name:
+  become: yes
+  remote_user: ansadmin
+  import_tasks: httpd_status.yml
