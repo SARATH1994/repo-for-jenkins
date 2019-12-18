@@ -73,6 +73,8 @@ sudo service sshd status/restart/reload/start/stop -l
 
 ssh -v user2@webserver will get verbose log 
 
+####Imp: Configuring Sudo access of root to a  user 
 
+https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux_OpenStack_Platform/2/html/Getting_Started_Guide/ch02s03.html
 
 
