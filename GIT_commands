@@ -64,7 +64,26 @@ git rm file_name to delete the file
  git add -A ( to add changes and update the working directory )
 
 
+logging 
 
+git log 
 
+git log --oneline 
 
+git log --oneline --graph --decorate 
+
+git log one_commit_hashid..another_commit_hashid
+
+git log --since='Date1'
+
+git log --after="2014-7-1" 
+
+git log --after="2014-7-1" --before="2014-7-4"
+
+git log --author="John"
+
+git show commit_id 
+
+git log -- foo.py bar.py
+ 
 
