@@ -86,4 +86,10 @@ git show commit_id
 
 git log -- foo.py bar.py
  
+git alias creation 
 
+git config --global alias.(your_custom_command) "original_git_commnd"
+
+git config --global alias.h10 "log -10" so from next time u just need to give git h10
+
+or we can modify in ~/gitconfig file 
