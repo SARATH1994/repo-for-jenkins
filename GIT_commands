@@ -1,0 +1,70 @@
+git config --global user.name "username"
+
+.git where git repository lives 
+
+git conig  --global user.email "useremail"
+
+git config --global --list 
+
+3 different stages
+
+Working directory , Staging Srea , local git repository (.git folder )
+
+git init 
+
+git clone 
+
+git add <file> to update the staging with changes and for tracking 
+
+git add . added changes recurssivly 
+
+
+git restore file_name <to undo the changes>
+
+git status
+
+git commit : to commit the changes to local repo 
+
+git-reset is to “Reset current HEAD to the specified state
+
+ git-restore “Restore working tree files”
+
+git rm --cached <file> only for file
+
+git rm -r --cached <folder> to reccursive
+
+git rm -r --cached . for reccursive in current folder
+
+git fetch 
+
+git push 
+
+master (root-commit)  first commit on repo 
+
+forking and cloning concepts . for cloning you need to add your ssh pub key into repo seetings setction 
+
+origin ->  remote repository reference name 
+
+the word origin/master means this is name of remote ref repository.
+
+git mv old_file_name new_file_name ( to rename the file )
+
+files need to be tracked by git , for deletion purpose  
+
+git ls-files to list files in repo 
+
+git rm file_name to delete the file 
+
+( use "git restore <file>..." to discard changes in working directory ) >>>> To discard the file changes in working dir  
+
+( use "git add/rm <file>..." to update what will be committed ) >>>> From working dir to  Staging Area
+
+ ( use "git restore --staged <file>..." to unstage ) >> To Unstage the staged files 
+ 
+ git add -A ( to add changes and update the working directory )
+
+
+
+
+
+
