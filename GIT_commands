@@ -93,3 +93,59 @@ git config --global alias.(your_custom_command) "original_git_commnd"
 git config --global alias.h10 "log -10" so from next time u just need to give git h10
 
 or we can modify in ~/gitconfig file 
+
+
+git diff HEAD gives us diiference between Working directory and Last commit on the branch 
+
+git diff --staged HEAD gives us diiference between Staging Area and Last commit on the branch 
+
+comparision between commits
+
+git diff ref_commit_id1 ref_commitid2
+
+eg: git diff 847ae8df HEAD(last commit)
+
+comparision between local and remote branches
+
+git diff master origin/master
+
+Branching Bacis
+
+git branch -a ( to list all branches in loacal and remote )
+
+git branch new_branchname 
+
+git checkout new_branchname 
+
+rename the branch
+
+git -m old_branch new_branch 
+
+delete the branch 
+
+git -d old new_branchname 
+
+to get new branch and checkout branch 
+
+git checkout -b new_branch_name
+
+
+git diff master newbranch 
+
+git merge newbranch  (merging in to current branch )
+
+*this is called fast forward merge bcz we didn't do any work on master till merge happens 
+
+git commit -am "this is shortcut for adding and commting changes"
+
+git merge newbranch --no--ff ( to disable fast forward merges)
+
+
+
+
+
+
+
+
+
+
