@@ -138,9 +138,7 @@ git merge newbranch  (merging in to current branch )
 
 git commit -am "this is shortcut for adding and commting changes"
 
-git merge newbranch --no--ff ( to disable fast forward merges)
-
-
+git merge newbranch --no--ff ( to disable fast forward merges) No fast forward 
 
 
 
