@@ -140,10 +140,61 @@ git commit -am "this is shortcut for adding and commting changes"
 
 git merge newbranch --no--ff ( to disable fast forward merges) No fast forward 
 
+REBASE IS not reccommended one though both merge and Rebase incorporate the changes from one brach to another 
+
+Rebase changes the commit history of current brach with rebasing brach 
+
+Feature branch :  git rebase master
 
 
+git stash (to save work in progess)
+
+to get back the stash,  issue
+
+git stash apply 
+
+to drop git stash drop 
 
 
+Tagging 
+##############
+
+::::light weigt tags
+
+git tag <tagname> to create tag 
+
+git tag --list 
+
+git tag --delete <tagnaem>
+
+:::::Annotaed Tags 
+
+git tag -a v-1.0 (is the Annotaed tag ) brings up test console to write some message 
+
+git show <tagname>
+
+
+git commit --amend (to modify the commit message )
+
+compare the tags
+
+git diff tag1 tag2
+
+tagging previos git commit 
+
+git tag -a "this is gor taggong"  d7t8ab3 (is the commit id)
+
+to move the tag or to update the tag 
+
+git tag  tagname -f commitid 
+
+git push origin <tagname>
+
+git reflog (Actually shows everything you done )
+
+git log (commit history)
+
+git reset HEAD commitid 
 
 
 
