@@ -1,0 +1,146 @@
+@Library('maven-shared-library') _
+
+pipeline {
+	
+	agent any
+	
+	environment {
+		
+        NEXUS_FETCH_URL = 'http://:/nexus/service/local/artifact/maven/redirect'
+		NEXUS_DEPLOY_URL = 'http://nexus/content/repositories/'
+		NEXUS_URL = '/nexus'
+		NEXUS_VERSION = 'nexus2'
+		NEXUS_PROTOCOL = 'http'
+		
+		
+    }
+	
+	parameters {
+		
+		string(name: 'Version_No', defaultValue: '1.0', description: 'Version of the project')
+		choice(name: 'Version_Type', choices: ['SNAPSHOT', 'RELEASES'], description: 'Please Choose the version type')
+		booleanParam(name: 'Integration_Test', defaultValue: false, description:'Is the build requires Integration_Tests')
+		booleanParam(name: 'Nexus_Upload', defaultValue: false, description: 'uploading artifacts to nexus')
+		booleanParam(name: 'Deployment', defaultValue: false, description: 'Do you want to deploy the generated artifacts?')
+		choice(name: 'Deploy_To', choices: ['dev', 'QA', 'UAT'], description: 'Please Choose the Deployment env if and only Deployment param has a check')
+		
+	}
+	
+	options {
+        disableConcurrentBuilds()
+        buildDiscarder(logRotator(numToKeepStr: '10'))
+	}
+
+	stages {   					
+	
+		stage('Build') {
+			steps {
+				script {
+					mavenCI.preparation( "${params.Version_No}" , "${params.Version_Type}")
+					mavenCI.Build()
+				}
+			}
+		}
+		
+		stage('Unit Test') {
+            steps {
+				script {
+					mavenCI.UT()
+				}
+			}
+		
+			post {
+				always { 
+					junit allowEmptyResults: true, testResults: '**/target/surefire-reports/TEST-*.xml'
+				}
+			}
+        }
+                
+		stage('Integration Test') {
+			when { 
+				expression 
+					{ 
+						return ( params.Integration_Test )
+					}
+				}
+            steps {
+				script {
+					mavenCI.IT()
+				}
+			}
+            post {
+				always { 
+					junit allowEmptyResults: true, testResults: '**/target/failsafe-reports/*.xml'
+				}
+		    }
+		} 
+			
+        stage('Statical Code Analysis') {
+			steps {
+				script {
+					mavenCI.SonarAnalysis()
+				}
+			}
+		}
+            
+		stage("Quality Gate") {
+            steps {
+				timeout(time: 15, unit: 'MINUTES') {
+					waitForQualityGate abortPipeline: true
+				}
+            }
+        }
+		
+		stage("Upload to nexus"){
+			when { 
+				expression 
+					{ 
+						return ( params.Nexus_Upload ||  params.Deployment )
+					} 
+				} 
+			steps {
+				script {
+					mavenCI.Nexus_Upload()
+				}
+			}	
+		}
+			
+		stage ('Deployment') {
+			when { 
+				expression 
+					{ 
+						return ( params.Deployment )
+					} 
+				} 
+			steps {
+				script {
+					mavenCI.Nexus_Download()
+				}
+				
+			}
+		}
+		
+		stage('Deploy - Staging') {
+            when {
+                branch 'development'
+            }
+            steps {
+                echo "Some 	Steps to deploy to development "
+            }
+        }
+        
+		stage('Deploy - Production') {
+            when {
+                branch 'production'
+            }
+            steps {
+                echo "some steps deploy into production"
+            }
+        } 
+	}
+}
+
+  
+
+
+
