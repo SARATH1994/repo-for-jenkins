@@ -1,0 +1,16 @@
+POM
+
+maven co-ordinates 
+
+GOALS/TASKS lowest level of workin maven 
+  this is done by plugins 
+    eg : mvn compile:compile 
+    
+ Phases
+ 
+ Life cycle is combinations of Phases , Phases are mapped to Goals 
+ 
+ PLugins are everything , offers all needed functionality these needed to be download before use 
+ 
+ maven clean to clear the target foldwer 
+ 
