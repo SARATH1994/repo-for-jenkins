@@ -1,0 +1,137 @@
+def preparation(version_no,version_type) {
+	fls = findFiles glob: '**/pom.xml'
+	
+	if (!fls) { error ('pom.xml is not found in workspace') }
+	env.type = (fls.size() == 1) ? 'SingleModule' : 'MultiModule' ;	
+	env.pom_location = ( "${type}" == 'SingleModule') ? "${fls[0].path}" : 'pom.xml' ;
+	if ( !(version_no || version_type) )  {
+		echo 'Building artifacts based on defaults from pom'
+		pom = readMavenPom file: "${pom_location}"
+		env.V = "${pom.version}"
+		echo "${pom.version} ****${pom.revision}"
+		env.Build_options = "-B -Dskip.unit.tests=true -Dskip.integration.tests=true -f ${pom_location} "
+		env.unitTest = "-B -Dskip.unit.tests=true -Dmaven.test.failure.ignore=true -f ${pom_location}"
+		env.IntegrationTEST = "-B -Dskip.integration.tests=true -f ${pom_location} "
+		return ;
+	}
+	
+	if (!version_no) { error ('You must pass version no') }
+	if ( !(version_type == 'SNAPSHOT' || version_type == 'RELEASES') ) { error( 'Given version type neither "SNAPSHOT" nor "RELEASES"' ) }
+	
+	echo "Buliding ${type} Maven Project"
+	
+	if ( !(version_type == 'SNAPSHOT') ) {
+		env.V = ${version_no}
+		env.Build_options = "-B -Dskip.unit.tests=true -Dskip.integration.tests=true -Dbuild=${V} -f ${pom_location} "
+		env.unitTest = "-B  -Dskip.integration.tests=true -Dmaven.test.failure.ignore=true -Dbuild=${V} -f ${pom_location}"
+		env.IntegrationTEST = "-B -Dskip.unit.tests=true -Dbuild=${V} -f ${pom_location}"
+		env.repository='jenkins_trial_prod' 
+	}
+	env.V = "${version_no}.${BUILD_NUMBER}-${version_type}"
+	env.Build_options = "-B -Dskip.unit.tests=true -Dskip.integration.tests=true -Dbuild=${V} -f ${pom_location}"
+	env.unitTest = "-B -Dskip.integration.tests=true -Dmaven.test.failure.ignore=true -Dbuild=${V} -f ${pom_location}"
+	env.IntegrationTEST = "-B -Dskip.unit.tests=true -Dbuild=${V} -f ${pom_location}"
+	env.repository='jenkins_trial_test'
+}
+
+
+def Build() {
+	withMaven(maven: 'Maven', publisherStrategy: 'EXPLICIT') {
+		bat 'mvn clean install %Build_options% '
+	}
+}
+
+def UT() {
+	withMaven(maven: 'Maven', publisherStrategy: 'EXPLICIT') {
+		bat 'mvn test %unitTest%'
+	}
+}
+
+def IT() {
+	withMaven(maven: 'Maven', publisherStrategy: 'EXPLICIT') {
+		bat 'mvn verify %IntegrationTEST%'
+	}
+}
+
+def SonarAnalysis() {
+	withSonarQubeEnv('SonarQube') {
+		withMaven(maven: 'Maven', publisherStrategy: 'EXPLICIT') {
+			bat 'mvn sonar:sonar %Build_options%'
+		}
+	}
+}
+
+def custom_qg_check () { 
+	
+	
+	def qg_pom = readMavenPom file: "${pom_location}"
+	env.qg_G = "${qg_pom.groupId}"
+	env.qg_A = "${qg_pom.artifactId}"
+	
+	withCredentials([usernameColonPassword(credentialsId: 'Sonar_Token_auth', variable: 'SonarApi_auth')]) {
+		bat 'curl -s -u %SonarApi_auth%  localhost:9000/api/qualitygates/project_status?projectKey=%qg_G%:%qg_A%  > qg.json'	
+   
+   }
+	
+	def QG = readJSON file: 'qg.json'
+	def  Arr = QG.projectStatus.conditions
+	
+	for ( i=0; i<Arr.size(); i++ ) {
+		if ( Arr[i].metricKey == 'coverage') 
+		act_cvg = Arr[i].actualValue
+		else 
+		continue;
+	}
+	
+	println ('The overall coverage value for this project:' +act_cvg)
+	float def_cvg = ( "${Deploy_TO}" == 'dev' ) ? 40.0 : 70.0  
+	println ("The cofigured coverage value for the environment:  ${Deploy_TO} is " +def_cvg)
+	float F = Float.parseFloat(act_cvg)
+	if ( F >= def_cvg ) 
+	echo "Customized Quality gate is passed "
+	else 
+	error("coverage failed " )
+}
+
+
+
+def Nexus_Upload() {
+	withMaven(maven: 'Maven', publisherStrategy: 'EXPLICIT') {
+		bat 'mvn flatten:flatten deploy -Ddeploy_url=%NEXUS_DEPLOY_URL%%repository% %Build_options%'
+	}	
+}
+	
+def Nexus_Download() {
+	if ( type == 'SingleModule' )
+		retrive_artifacts_SingleModule()
+	else 		
+		retrive_artifacts_MultiModule()
+}
+
+def retrive_artifacts_SingleModule () {
+	def pom = readMavenPom file: "${pom_location}"
+	env.G = "${pom.groupId}"
+	env.A = "${pom.artifactId}"
+	env.P = "${pom.packaging}"
+	withCredentials([usernameColonPassword(credentialsId: 'nexus-cred', variable: 'nexus-auth')]) {
+		timeout(time: 3, unit: 'MINUTES') {
+			bat 'curl -sS %NEXUS_FETCH_URL%?"r=%repository%&g=%G%&a=%A%&v=%V%&p=%P%" -u %nexus-auth% -v -R --location-trusted --fail -o %A%-%V%.%P%'
+		}	
+	}
+}
+	
+def retrive_artifacts_MultiModule () {
+	new_fls = findFiles glob: '**/pom.xml'
+	def pom = readMavenPom file: "${pom_location}"
+	env.G = "${pom.groupId}"
+	for ( i in new_fls ) {
+		def itr_pom = readMavenPom file: "${i}"
+		env.A = "${itr_pom.artifactId}"
+		env.P = "${itr_pom.packaging}"
+		withCredentials([usernameColonPassword(credentialsId: 'nexus-cred', variable: 'nexus-auth')]) {
+			timeout(time: 3, unit: 'MINUTES') {
+				bat 'curl -sS %NEXUS_FETCH_URL%?"r=%repository%&g=%G%&a=%A%&v=%V%&p=%P%" -u %nexus-auth% -v -R --location-trusted --fail -o %A%-%V%.%P%'
+			}
+		}
+	}
+}
