@@ -1,0 +1,79 @@
+<project>
+
+<groupId> </groupId>
+<artifactId> </artifactId>
+<version>${revision}</version>
+<packaging> </packaging>
+
+<properties>
+
+<revision>${build}</revision>
+
+</properties>
+
+<repositories>
+
+</repositories>
+
+<dependencies>
+
+<dependency>
+
+<groupId> </groupId>
+<artifactId> </artifactId>
+<version> </version>
+
+</dependency>
+
+</dependencies>
+
+<build>
+
+<plugins>
+
+needed plugins 
+
+org.jacco plugin : Jacco-maven plugin 
+org.apache.maven.plugins : maven-surefire-plugin
+org.codehaus.mojo: flatten-maven-plugin 
+<plugin>
+
+<groupId> </groupId>
+<artifactId> </artifactId>
+<version> </version>
+
+<configuration>
+-----
+</configuration>
+
+</plugin
+
+</pugins>
+</build>
+
+<distributionManagement>
+
+<snapshotRepository>
+
+<id>nexus-snapshots</id>
+<name>snapshotRepository</name>
+<url>${deploy_url}</url>
+
+</snapshotRepository>
+
+</distributionManagement>
+
+
+<profiles>
+
+<profile>
+<id>coverage<id>
+<activation></activation>
+<build></build>
+<profile>
+</profile>
+
+
+</profiles>
+
+</project>
