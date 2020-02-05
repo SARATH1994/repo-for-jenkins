@@ -1,3 +1,10 @@
+### needed plugins 
+
+org.jacco plugin : Jacco-maven plugin 
+org.apache.maven.plugins : maven-surefire-plugin
+org.codehaus.mojo: flatten-maven-plugin 
+
+
 <project>
 
 <groupId> </groupId>
@@ -31,11 +38,7 @@
 
 <plugins>
 
-needed plugins 
 
-org.jacco plugin : Jacco-maven plugin 
-org.apache.maven.plugins : maven-surefire-plugin
-org.codehaus.mojo: flatten-maven-plugin 
 <plugin>
 
 <groupId> </groupId>
