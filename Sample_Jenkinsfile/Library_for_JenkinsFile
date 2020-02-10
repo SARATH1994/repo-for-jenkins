@@ -1,8 +1,12 @@
 def preparation(version_no,version_type) {
 	fls = findFiles glob: '**/pom.xml'
+// from pipeline utility steps plugin , to find files in workspace. When ** is used as the name of a directory in the pattern, it matches zero or more directories. 
 	
-	if (!fls) { error ('pom.xml is not found in workspace') }
-	env.type = (fls.size() == 1) ? 'SingleModule' : 'MultiModule' ;	
+	if (!fls) { error ('pom.xml is not found in workspace') } 
+// if fls either null or empty throws the stated error 
+	
+	env.type = (fls.size() == 1) ? 'SingleModule' : 'MultiModule' ;
+// by suffexing env. in front of variables means that can be accessed throughout Jenkins 
 	env.pom_location = ( "${type}" == 'SingleModule') ? "${fls[0].path}" : 'pom.xml' ;
 	if ( !(version_no || version_type) )  {
 		echo 'Building artifacts based on defaults from pom'
