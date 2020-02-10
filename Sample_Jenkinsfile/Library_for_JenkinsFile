@@ -6,12 +6,24 @@ def preparation(version_no,version_type) {
 // if fls either null or empty throws the stated error 
 	
 	env.type = (fls.size() == 1) ? 'SingleModule' : 'MultiModule' ;
+	
+	
+// by suffexing env. in front of variables means that can be accessed globally throughout pipeline build.
+
 	env.pom_location = ( "${type}" == 'SingleModule') ? "${fls[0].path}" : 'pom.xml' ;
 	
-// by suffexing env. in front of variables means that can be accessed globally throughout pipeline build  
+	
+	if ( "${type}" == 'MultiModule') { 
+		if ( !fileExists ('pom.xml') ) { error('pom.xml file not found at root level for Multimodule project') }
+	}
+	
+	
+	
+	echo "Buliding ${type} Maven Project"
+
 	
 	if (!version_no) { error ('version no is required') }
-	echo "Buliding ${type} Maven Project"
+	
 	
 	if ( !(version_type == 'SNAPSHOT') ) {
 		env.V = ${version_no}
@@ -61,8 +73,8 @@ def custom_qg_check () {
 	env.qg_G = "${qg_pom.groupId}"
 	env.qg_A = "${qg_pom.artifactId}"
 	
-	withCredentials([usernameColonPassword(credentialsId: 'Sonar_Token_auth', variable: 'SonarApi_auth')]) {
-		bat 'curl -s -u %SonarApi_auth%  localhost:9000/api/qualitygates/project_status?projectKey=%qg_G%:%qg_A%  > qg.json'	
+	withCredentials([usernameColonPassword(credentialsId: 'Sonar_Token_auth', variable: 'SonarApi_auth')]) { //Needs to configure Sonarqube1 credentials with name Sonar_Token_auth  
+		bat 'curl -s -u %SonarApi_auth%  sonar_URL:9000/api/qualitygates/project_status?projectKey=%qg_G%:%qg_A%  > qg.json'	
    
    }
 	
