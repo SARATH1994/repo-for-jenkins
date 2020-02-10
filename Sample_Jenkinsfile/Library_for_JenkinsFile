@@ -6,22 +6,11 @@ def preparation(version_no,version_type) {
 // if fls either null or empty throws the stated error 
 	
 	env.type = (fls.size() == 1) ? 'SingleModule' : 'MultiModule' ;
-// by suffexing env. in front of variables means that can be accessed throughout Jenkins 
 	env.pom_location = ( "${type}" == 'SingleModule') ? "${fls[0].path}" : 'pom.xml' ;
-	if ( !(version_no || version_type) )  {
-		echo 'Building artifacts based on defaults from pom'
-		pom = readMavenPom file: "${pom_location}"
-		env.V = "${pom.version}"
-		echo "${pom.version} ****${pom.revision}"
-		env.Build_options = "-B -Dskip.unit.tests=true -Dskip.integration.tests=true -f ${pom_location} "
-		env.unitTest = "-B -Dskip.unit.tests=true -Dmaven.test.failure.ignore=true -f ${pom_location}"
-		env.IntegrationTEST = "-B -Dskip.integration.tests=true -f ${pom_location} "
-		return ;
-	}
 	
-	if (!version_no) { error ('You must pass version no') }
-	if ( !(version_type == 'SNAPSHOT' || version_type == 'RELEASES') ) { error( 'Given version type neither "SNAPSHOT" nor "RELEASES"' ) }
+// by suffexing env. in front of variables means that can be accessed globally throughout pipeline build  
 	
+	if (!version_no) { error ('version no is required') }
 	echo "Buliding ${type} Maven Project"
 	
 	if ( !(version_type == 'SNAPSHOT') ) {
@@ -41,7 +30,7 @@ def preparation(version_no,version_type) {
 
 def Build() {
 	withMaven(maven: 'Maven', publisherStrategy: 'EXPLICIT') {
-		bat 'mvn clean install %Build_options% '
+		bat 'mvn clean package %Build_options% '
 	}
 }
 
@@ -58,7 +47,7 @@ def IT() {
 }
 
 def SonarAnalysis() {
-	withSonarQubeEnv('SonarQube') {
+	withSonarQubeEnv('SonarQube1') { // SonarQube1 is the name of the Sonarqube installation name configured in Sonarqube servers secvction.
 		withMaven(maven: 'Maven', publisherStrategy: 'EXPLICIT') {
 			bat 'mvn sonar:sonar %Build_options%'
 		}
