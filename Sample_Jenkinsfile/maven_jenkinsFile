@@ -89,7 +89,7 @@ pipeline {
 					waitForQualityGate abortPipeline: false 	// Refer waitForQualityGate step ? mark in snippet generator 
 				}
 				
-			mavenCI.Custom_qg_check()	
+			mavenCI.custom_qg_check()	
 				}
             }
         }
