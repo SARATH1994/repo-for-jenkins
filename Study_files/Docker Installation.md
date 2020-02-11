@@ -34,19 +34,39 @@ Server:
   Experimental:     false
  ----------------------------------
 
-systemctl enable docker // To up and run docker server or Docker daemon upon boot //
+$systemctl enable docker // To up and run docker server or Docker daemon upon boot //
 
-exit 
+$exit
 
-now performing as ec2-user in AWS linux machine
+$sudo useradd jenkins // Add the user, that you want to run with to the docker group.
+
+for debug ,
+
+$id
+
+uid=1001(jenkins) gid=1001(jenkins) groups=1001(jenkins),993(docker)
+
+$cat /etc/passwd
+
+ec2-user:x:1000:1000:EC2 Default User:/home/ec2-user:/bin/bash
+jenkins:x:1001:1001::/home/jenkins:/bin/bash
+
+$whoami
+
+jenkins
+
+now performing as jenkins user in  linux machine
 
 if i give docker version commands it is returning 
 
+$docker version or $docker ps 
+
 Docker client version is good
 
-Docker Server version Got permmission denied 
+Docker Server/daemon version Got permmission denied 
 
-::::: Manage Docker as a non-root user ::::::::::::;
+
+::::: Access the  Docker as a non-root user ::::::::::::;
 
 Link : https://docs.docker.com/install/linux/linux-postinstall/
 
@@ -56,11 +76,56 @@ Create the docker group.
 
 $ sudo groupadd docker
 
-Add your user to the docker group.
+$ sudo usermod -aG docker jenkins
 
-$ sudo usermod -aG docker ec2-user
+logout and login again with the above  or restart ,reboot
 
-logout and login again 
+Now you will be able access the docker daemon with specified user 
+
+
+When you create a new container it does not get created as your current user, but as root, which the daemon is running under.
+
+$ docker container run --rm \
+    -v ${PWD}:/var/www \
+    -w /var/www \
+    jtreminio/php:7.2 whoami
+root
+
+
+::: So run as your local user, right? ::::
+
+When you run Docker containers you can specify a user ID, plus a group ID. It is easy enough to do:
+
+docker container run --rm \
+    -v ${PWD}:/var/www \
+    -w /var/www \
+    -u $(id -u ${USER}):$(id -g ${USER}) \
+    jtreminio/php:7.2 composer require psr/log
+This generates the following:
+
+$ls -la
+
+drwx------ 3 jenkins jenkins  139 Feb 11 08:47 .
+drwxr-xr-x 4 root    root      37 Feb 11 07:58 ..
+-rw------- 1 jenkins jenkins   58 Feb 11 08:08 .bash_history
+-rw-r--r-- 1 jenkins jenkins   18 Jul 27  2018 .bash_logout
+-rw-r--r-- 1 jenkins jenkins  193 Jul 27  2018 .bash_profile
+-rw-r--r-- 1 jenkins jenkins  231 Jul 27  2018 .bashrc
+-rw-r--r-- 1 jenkins jenkins   53 Feb 11 08:47 composer.json
+-rw-r--r-- 1 jenkins jenkins 2073 Feb 11 08:47 composer.lock
+drwxr-xr-x 4 jenkins jenkins   53 Feb 11 08:47 vendor
+
+In my system, my user jenkins has user ID 1000 and group ID 1000, so the new line
+
+-u $(id -u ${USER}):$(id -g ${USER})
+
+gets interpreted as
+
+-u 1001:1001
+
+:::::::::::MUST READ ARTICLE:::::::::::
+
+LINK,  https://jtreminio.com/blog/running-docker-containers-as-current-host-user/#ok-so-what-actually-works
 
 
 :::::::::::::::Jenkins Installation :::::::::::::::::::::::::;
