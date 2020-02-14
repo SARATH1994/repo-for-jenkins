@@ -82,14 +82,14 @@ def custom_qg_check () {
 	def  Arr = QG.projectStatus.conditions
 	
 	for ( i=0; i<Arr.size(); i++ ) {
-		if ( Arr[i].metricKey == 'coverage') 
+		if ( Arr[i].metricKey == 'coverage') // Here the 'coverage' means metrickey value configured in Sonar qube needs change accordingly  
 		act_cvg = Arr[i].actualValue
 		else 
 		continue;
 	}
 	
 	println ('The overall coverage value for this project:' +act_cvg)
-	float def_cvg = ( "${Deploy_TO}" == 'dev' ) ? 40.0 : 70.0  
+	float def_cvg = ( "${Deploy_TO}" == 'dev' ) ? 40.0 : 70.0   // for dev configured value is 40 & others it is 70.
 	println ("The cofigured coverage value for the environment:  ${Deploy_TO} is " +def_cvg)
 	float F = Float.parseFloat(act_cvg)
 	if ( F >= def_cvg ) 
