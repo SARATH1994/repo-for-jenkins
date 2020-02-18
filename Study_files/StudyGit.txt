@@ -46,3 +46,4 @@ Below links tells how to implement CI/CD pipelines for gitflow way of working.
 https://www.atlassian.com/continuous-delivery/articles
 https://www.atlassian.com/continuous-delivery/principles/workflows-with-feature-branching-and-gitflow
 
+Using feature branches for user stories JIRA and bug fixes is a great way to push changes to your repo in Bitbucket (thus enabling CI to run against them)
