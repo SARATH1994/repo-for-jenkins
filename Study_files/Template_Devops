@@ -1,0 +1,25 @@
+### JAVA APPLICATION WITH MAVEN BUILD TOOL #######
+
+1.Source Code Checkout into Jenkins Job Workspace 
+
+2.Maven build stage
+
+3.Archive the artifacts if necessary 
+
+4.Maven Unit Tests
+
+5.Maven Integration Tests
+
+6.SonarScan/ Static Code analyis ( if needed we can use checkmarx )
+
+7.Checking Quality gate Stats
+
+8.Based on branch name , mvn artifacts will get  deployed into Nexus 
+
+
+
+
+
+
+
+
