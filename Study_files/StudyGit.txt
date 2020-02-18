@@ -19,5 +19,8 @@ Tags only needed on master branch they are meant for production release ,  to tr
 
 once merging is done we can delete Release and hot fixes branches.
 
+The master and develop branches are long-running branches and you do not commit directly into them
+
+Aside from an individual developer committing to a feature branch, nothing should be committed directly into master, develop, or a release branch. 
 
 
