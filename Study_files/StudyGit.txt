@@ -12,3 +12,12 @@ git checkout -b <branch name >
 git log for seeing history 
 
 read above
+
+GIT FLOW is the best branching statergy 
+
+Tags only needed on master branch they are meant for production release ,  to track the code.No other branch needed tags only they need merge commits.
+
+once merging is done we can delete Release and hot fixes branches.
+
+
+
