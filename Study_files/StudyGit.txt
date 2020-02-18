@@ -23,4 +23,20 @@ The master and develop branches are long-running branches and you do not commit 
 
 Aside from an individual developer committing to a feature branch, nothing should be committed directly into master, develop, or a release branch. 
 
+########### BUG FIX IS ANOTHER KIND OF FEATURE ###############
 
+
+!!!!!!      fIND BELOW      !!!!!!!!!
+
+nvie commented on Mar 25, 2010
+
+Well, that's rather arbitrary. I don't think you should hang on to the term "feature" too tight. A rule of thumb would be that if you need more than one commit for a change, you should do it on a feature branch, otherwise commit it directly on develop.
+
+Adding another flavour of branches would only make sense if it would be an actual other flavour. What you are referring to are simply feature branches (in that they branch off from develop and merge back into develop).
+
+I would advise to name them "fix-" manually, for example:
+feature/fix-memory-crash
+
+!!!!!!!!  END       !!!!!!!!!!!!!!!!!
+
+##################################################################
