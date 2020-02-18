@@ -40,3 +40,9 @@ feature/fix-memory-crash
 !!!!!!!!  END       !!!!!!!!!!!!!!!!!
 
 ##################################################################
+
+Below links tells how to implement CI/CD pipelines for gitflow way of working.
+
+https://www.atlassian.com/continuous-delivery/articles
+https://www.atlassian.com/continuous-delivery/principles/workflows-with-feature-branching-and-gitflow
+
