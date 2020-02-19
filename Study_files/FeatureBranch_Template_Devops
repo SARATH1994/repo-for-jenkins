@@ -8,7 +8,7 @@
 
 4.Maven Unit Tests
 
-5.Running Integration tests 
+5.Running Integration tests (optional)
 
 5A.SonarScan/ Static Code analyis ( if needed we can use Checkmarx for security purpose) will get , code coverage on new code 
 
