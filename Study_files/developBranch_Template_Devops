@@ -17,3 +17,7 @@
 6.Pushing the Build Artifact into Nexus Snap shots 
 
 7.Notifying developers about build 
+
+8.Trigger the DEPLOY_DEV job which takes the Artifacts from Nexus to Dev server 
+
+9.There after artifact promotion from Dev to QA and after necessaery tests happens . aFTER STABLE code needs to create Release branch and merge back to master and Develop.
