@@ -20,7 +20,7 @@
 
 8.Trigger the DEPLOY_DEV job which takes the Artifacts from Nexus to Dev server 
 
-9.There after artifact promotion from Dev to QA and after necessaery tests happens . aFTER STABLE code needs to create Release branch and merge back to master and Develop.
+9.There after artifact promotion from Dev to QA means getting the same artifact from Nexus and after necessaery tests like IntegrationTest, PerfomanceTest , User acceptence Tets, Systems test  happens . aFTER STABLE code needs to create Release branch from develop and merge back to master and Develop.
 
 USEFUL LINK 
 https://help.sonatype.com/repomanager3/rest-and-integration-api/search-api
