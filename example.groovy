@@ -20,6 +20,7 @@ new A().methodA()              //The code outside of class is known as script
 new B().methodB()
 new C().methodC()   
 
+/*
 
 $groovy main.groovy
 
@@ -27,3 +28,5 @@ $groovy main.groovy
 in methodA
 in methodB
 in methodC
+
+*/
