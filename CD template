@@ -1,0 +1,23 @@
+Need to give the build  no as a input the master job which is taking care of triggering other related CD job 
+which we want to release to higher environments
+
+If current environment is not dev it will done the promotion by reading properties files
+
+eg : In artifactory ,
+
+dev -> qa
+qa -> model
+model -> perf
+
+In QA, it wii download the artifact from that path will do deployment
+
+#### DEV ########
+1.DEV
+2.DEV-INT
+####### Non-prod ##########
+3.QA
+4.MODEL
+5.PERF
+###### PROD ########
+6.PROD1
+7.PROD2
