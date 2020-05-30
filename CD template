@@ -5,7 +5,7 @@ If current environment is not dev it will done the promotion by reading properti
 
 eg : In artifactory ,
 
-dev -> qa
+dev -> qa , update the promotion_history file.csv
 qa -> model
 model -> perf
 
