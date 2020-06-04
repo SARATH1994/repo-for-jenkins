@@ -4,8 +4,13 @@ https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 
 ansicolor(xtrem) {
 
-echo """\033[
-   
+echo """\033[34m
+
+------------------------------
+\u2756 INFO: ${message}
+------------------------------
+
+""""
 
 }
 
