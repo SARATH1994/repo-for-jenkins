@@ -6,18 +6,16 @@ https://i.stack.imgur.com/9UVnC.png
 
 ForeGround , BackGround Colors
 
-ansicolor(xtrem) { 
+def Info (message) {
+    ansicolor(xtrem) { 
+        
+        echo """\033[34m
+        ------------------------------
+        \u2756 INFO: ${message}
+        ------------------------------
 
-echo """\033[34m
-
-
-
-------------------------------
-\u2756 INFO: ${message}
-------------------------------
-
-""""
-
+        """
+    }
 }
 
 What/Who Causes triggered build : def causes = currentBuild.getBuildCauses();  println causes;  returns Json file 
