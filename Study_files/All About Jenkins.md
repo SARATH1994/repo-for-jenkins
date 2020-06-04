@@ -15,7 +15,7 @@ def Info (message) {
    ------------------------------
    """
     
-    }
+   }
 }
 
 What/Who Causes triggered build : def causes = currentBuild.getBuildCauses();  println causes;  returns Json file 
