@@ -9,12 +9,12 @@ ForeGround , BackGround Colors
 def Info (message) {
     ansicolor(xtrem) { 
         
-        echo """\033[34m
-        ------------------------------
-        \u2756 INFO: ${message}
-        ------------------------------
-
-        """
+   echo """\033[34m
+   ------------------------------
+   \u2756 INFO: ${message}
+   ------------------------------
+   """
+    
     }
 }
 
