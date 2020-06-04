@@ -2,9 +2,15 @@ Add color to console , Ansicolor-plugin: https://blog.mphomphego.co.za/blog/2017
 
 https://stackoverflow.com/questions/4842424/list-of-ansi-color-escape-sequences
 
-ansicolor(xtrem) {
+https://i.stack.imgur.com/9UVnC.png
+
+ForeGround , BackGround Colors
+
+ansicolor(xtrem) { 
 
 echo """\033[34m
+
+
 
 ------------------------------
 \u2756 INFO: ${message}
