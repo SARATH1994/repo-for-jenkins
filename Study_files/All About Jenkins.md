@@ -30,4 +30,16 @@ node {
     externalMethod.lookAtThis("Steve")
     }
     
+1.	If there were no enough executors you can’t run parallel builds/Concurrent builds 
+2.	Running two jobs on same node equals to running a parallel tasks on same node  concurrent builds
+3.	We can have a single machine with different node names in Jenkins ui pointing to diffent root dir in remote machine
+
+Nodes = master+agents
+Agents = Nodes – master
+
+executor is nothing but 
+
+
+
+    
    
