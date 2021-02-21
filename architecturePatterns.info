@@ -1,0 +1,31 @@
+           Library vs Framework 
+              https://www.youtube.com/watch?v=vFzP2SaMyA0
+                      
+                      
+                      
+           UI/UX Development Flows  client side
+            1.HTML for Layout
+            2.CSS is for Styling 
+            3.Java Script is to give Functionality
+           
+           4.jQuery is library
+           
+           5. boot strap is CSS framework
+           6.Angular Js is frame work
+           7.React JavaScript library
+           
+           
+           Backend Frame works
+           
+           1.Express.js for node js  , 
+              Node.js is an open-source, cross-platform, back-end JavaScript runtime environment that runs on the V8 engine and executes JavaScript code outside a web browser
+              similar to JRE for java
+              JRE = JVM + Libraries
+           
+           2.Spring boot for java
+           
+           3.DJANGO for python 
+           
+           FLASK, RUBY ON RAILS
+           
+           
