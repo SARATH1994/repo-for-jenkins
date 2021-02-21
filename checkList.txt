@@ -1,3 +1,8 @@
+IDES
+  Eclipse
+  INTELIJ
+  VSCODE editor
+  
 Version Contol System
   Git
   SVN
@@ -15,6 +20,13 @@ Binary Files Managenet System
   Nexus
 App Deployment Strategy
   Container
+    Container run time env
+      low level : runc , rkt  --> running container by using namespaces , cgroups in OS 
+      newly OCI, buildah
+    High level : containerd   --> managing images , containers and sharing 
+    
+        Container Management
+          Kubernets 
   Non-container
 DDL/DML Strategy
   Liquibase for different databases
