@@ -46,6 +46,10 @@ Saas
   Gmail
   Sales Force
   
+ Integration Platforms (iPaas)
+  Mulesoft: integrates wider range of applications 
+  Dell boomi
+  
   SECOPS
   1.SONARQUBE
   2.VERACODE
