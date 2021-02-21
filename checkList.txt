@@ -1,0 +1,37 @@
+Version Contol System
+  Git
+  SVN
+Integration Tools
+  Jenkins
+  Circle CI
+Build Tools for Backend code 
+  mvn 
+  gradle
+Build Tools for Front end code 
+  npm
+  zip
+Binary Files Managenet System
+  Artifactory
+  Nexus
+App Deployment Strategy
+  Container
+  Non-container
+DDL/DML Strategy
+  Liquibase for different databases
+    Oracle
+    Postgress 
+    AWS RDS
+Montioring Tools
+    Dyantrace 
+    Nagios 
+Infrastructure Automation Tools
+  Teraform --> spins up Infrastructure on any provider
+Software Installation and Configuration
+  Ansible
+  Puppet
+  Chef
+
+    
+  
+
+ 
