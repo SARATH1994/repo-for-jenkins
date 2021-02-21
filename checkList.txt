@@ -30,7 +30,27 @@ Software Installation and Configuration
   Ansible
   Puppet
   Chef
+ Message Que
+  Rabbit Message Que
+ 
+IaaS
+    AWS
+    AZURE
+    Google Cloud
+Pass
+  Openshift by REDHAT
+  PCF by Vm ware
+  Elastic Bean Stak by AWS
+Saas
+  Cisco Webex
+  Gmail
+  Sales Force
+  
+  
 
+Metrics Generation  
+Splunk 
+is a software platform widely used for monitoring, searching, analyzing and visualizing the machine-generated data in real time
     
   
 
